@@ -1,7 +1,7 @@
 import pandas
 import os 
 
-
+# Define delimiters
 corporate_participants_delimiter = """================================================================================
 Corporate Participants
 ================================================================================"""
@@ -23,9 +23,8 @@ Definitions
 
 delimiter = "--------------------------------------------------------------------------------"
 
-
+# Process data
 def process_participants(corporate_participants):
-    ''' Return lists with the corporate participants and their respective roles and companies'''
     corporate_participants = corporate_participants.split("\n")
     i = 0
     output = {}
@@ -33,7 +32,7 @@ def process_participants(corporate_participants):
         line = corporate_participants[i]
         if line.startswith(" *"):
             name = line[2:].strip()
-            company, role = corporate_participants[i+1].split(" - ")
+            company, role = corporate_participants[i + 1].split(" - ")
             company, role = company.strip(), role.strip()
             output[name] = (company, role)
             i += 2
@@ -41,13 +40,10 @@ def process_participants(corporate_participants):
             i += 1
     return output
             
-
-
 def processing(data, path):
     corporate_participants = data.split(corporate_participants_delimiter)[1].split(conference_call_participants_delimiter)[0]
     conference_participants = data.split(conference_call_participants_delimiter)[1].split(presentation_delimiter)[0]
 
-    # extract lines startign with "*"
     dic_corporate_participants = process_participants(corporate_participants)
     dic_conference_participants = process_participants(conference_participants)
     list_corporate_participants = list(dic_corporate_participants.keys())
@@ -62,12 +58,12 @@ def processing(data, path):
     speaker_type = []
     speaker_company = []
     speaker_role = []
-    # process every speaker line in the presentation
+
     presentation_lines = presentation.split(delimiter)
-    for i in range(len(presentation_lines)-1):
+    for i in range(len(presentation_lines) - 1):
         if i % 2 == 1:
             speaker = presentation_lines[i]
-            text = presentation_lines[i+1]
+            text = presentation_lines[i + 1]
             if "Operator" in speaker:
                 speaker = "Operator"
                 speaker_type.append("Operator")
@@ -87,12 +83,11 @@ def processing(data, path):
             list_text.append(text.strip())
             type.append("presentation")
 
-    # process every speaker line in the Q&A
     qna_lines = qna.split(delimiter)
-    for i in range(len(qna_lines)-1):
+    for i in range(len(qna_lines) - 1):
         if i % 2 == 1:
             speaker = qna_lines[i]
-            text = qna_lines[i+1]
+            text = qna_lines[i + 1]
             if "Operator" in speaker:
                 speaker = "Operator"
                 speaker_type.append("Operator")
@@ -119,17 +114,14 @@ def processing(data, path):
     column_company_name = [column_company_name] * len(list_speaker)
     column_date = [column_date] * len(list_speaker)
 
-    # create dataframe
     try:
         df = pandas.DataFrame({"speaker": list_speaker, "text": list_text, "type": type, "speaker_type": speaker_type, "speaker_company": speaker_company, "speaker_role": speaker_role, "company_name": column_company_name, "date": column_date})
     except:
         return None
     return df
 
-
 def main(directory):
     path_list = []
-    # all .txt files in sub directories
     for root, dirs, files in os.walk(directory):
         for file in files:
             if file.endswith(".txt"):

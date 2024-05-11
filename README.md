@@ -4,7 +4,7 @@ Traditional stock price prediction models largely depend on historical data and 
 
 This is a collaborative effort by team members [Dilan SriDaran](https://www.linkedin.com/in/dilansridaran/), [Maxime Wolf](https://www.linkedin.com/in/maxime-wolf/), and [Nuobei Zhang](https://www.linkedin.com/in/nuobeizhang/).
 
-You can read the complete report for this project [here](https://maximewolf.com/assets/pdf/A_Novel_Earnings_Call_Dataset_for_Stock_Return_Prediction.pdf)
+You can read the complete report for this project [here](https://maximewolf.com/assets/pdf/A_Novel_Earnings_Call_Dataset_for_Stock_Return_Prediction.pdf).
 
 ## Installation
 

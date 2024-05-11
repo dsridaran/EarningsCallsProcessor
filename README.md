@@ -1,4 +1,4 @@
-# Earnings_Calls_Processor
+# Earnings Calls Processor
 
 Traditional stock price prediction models largely depend on historical data and market indicators, but often overlook the rich, unstructured multimedia data available from earnings calls. This project seeks to bridge this gap by providing a deep learning framework to structure data from earnings calls, both text and audio, which will provide deep insights into a company's performance.
 

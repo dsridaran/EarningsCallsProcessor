@@ -20,6 +20,8 @@ You also need to install the following package, in addition to the library liste
 python3 -m spacy download en_core_web_sm
 ```
 
+The underlying data is too large to upload to GitHub. Please reach out if you would like access to the data.
+
 ## Usage
 
 The main script is `main.py`, which you can run with the following command from the `src` directory:
